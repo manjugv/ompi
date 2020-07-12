@@ -105,6 +105,10 @@ int oshmem_info_init(void)
     }
 
     if (NULL != (cptr = getenv(OSHMEM_ENV_SYMMETRIC_SIZE))) {
+        char *p1;
+        if (NULL != (p1 = getenv(SHMEM_HEAP_SIZE))) {
+            SHMEM_API_WARNING("SYMMETRIC_HEAP_SIZE and SMA_HEAP_SIZE are both set; SYMMETRIC_HEAP_SIZE takes precedence.");
+        }
         ret = oshmem_info_get_heap_size(OSHMEM_ENV_SYMMETRIC_SIZE, cptr, &oshmem_shmem_info_env.symmetric_heap_size);
         if (OSHMEM_SUCCESS != ret) {
             goto out;

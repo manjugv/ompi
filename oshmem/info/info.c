@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2015      Mellanox Technologies, Inc.
- *                         All rights reserved.
- * Copyright (c) 2018      Amazon.com, Inc. or its affiliates.  All Rights reserved.
- * Copyright (c) 2019      Research Organization for Information Science
- *                         and Technology (RIST).  All rights reserved.
+ * Copyright (c) 2015-2020      Mellanox Technologies, Inc.
+ *                              All rights reserved.
+ * Copyright (c) 2018           Amazon.com, Inc. or its affiliates.  All Rights reserved.
+ * Copyright (c) 2019           Research Organization for Information Science
+ *                              and Technology (RIST).  All rights reserved.
  * $COPYRIGHT$
  *
  * Additional copyrights may follow
@@ -107,14 +107,17 @@ int oshmem_info_init(void)
     if (NULL != (cptr = getenv(OSHMEM_ENV_SYMMETRIC_SIZE))) {
         char *p1;
         if (NULL != (p1 = getenv(SHMEM_HEAP_SIZE))) {
-            SHMEM_API_WARNING("SYMMETRIC_HEAP_SIZE and SMA_HEAP_SIZE are both set; SYMMETRIC_HEAP_SIZE takes precedence.");
+            SHMEM_API_WARNING("SYMMETRIC_HEAP_SIZE and SMA_HEAP_SIZE are both
+                               set; SYMMETRIC_HEAP_SIZE takes precedence.");
         }
-        ret = oshmem_info_get_heap_size(OSHMEM_ENV_SYMMETRIC_SIZE, cptr, &oshmem_shmem_info_env.symmetric_heap_size);
+        ret = oshmem_info_get_heap_size(OSHMEM_ENV_SYMMETRIC_SIZE, cptr,
+                                        &oshmem_shmem_info_env.symmetric_heap_size);
         if (OSHMEM_SUCCESS != ret) {
             goto out;
         }
     } else if (NULL != (cptr = getenv(SHMEM_HEAP_SIZE))) {
-        ret = oshmem_info_get_heap_size(SHMEM_HEAP_SIZE, cptr, &oshmem_shmem_info_env.symmetric_heap_size);
+        ret = oshmem_info_get_heap_size(SHMEM_HEAP_SIZE, cptr,
+                                        &oshmem_shmem_info_env.symmetric_heap_size);
         if (OSHMEM_SUCCESS != ret) {
             goto out;
         }
